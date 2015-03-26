@@ -8,10 +8,10 @@ using QuickStartEntitiesEF;
 
 // NOTES
 // 1) Name DA & EF Models as similarly as possible (may require post-model designer property changes to match names)
-// 2) copy full contents of both DA & EF app config files into console app config file
+// 2) copy/merge full contents of both DA & EF app config files into console app config file
 // 3) add two core refs for each DA & EF in addition to model ref
 // 4) update syntax a) EF requires explict object/table name in dbcontext refs, e.g. dbContext(.Customers).Add and b) syntax Remove vs. Delete
-// 5) resolve namespace collsion on object/table, e.g. QuickStartEntities(EF).Customer
+// 5) resolve namespace collision on object/table, e.g. QuickStartEntities(EF).Customer
 // 6) requires local sql server db with a single customer table...
 
 namespace QuickStartUI
