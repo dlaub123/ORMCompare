@@ -20,8 +20,8 @@ namespace QuickStartUI
     {
         static void Main(string[] args)
         {
-            DoItDA();
-            DoITEF();
+            DoItDA();  // do it with Telerik Data Access
+            DoItEF();  // do it with Microsoft Entity Framework
         }
         static void DoItDA()
         {
@@ -57,7 +57,7 @@ namespace QuickStartUI
             Console.ReadKey();
         }
 
-        static void DoITEF()
+        static void DoItEF()
         {
             using (var dbContext = new QuickStartEntitiesEF.QuickStartDBEntitiesEF())
             {
