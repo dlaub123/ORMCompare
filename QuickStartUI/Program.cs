@@ -21,7 +21,7 @@ namespace QuickStartUI
         static void Main(string[] args)
         {
             DoItDA();  // do it with Telerik Data Access
-            DoItEF();  // do it with Microsoft Entity Framework
+            DoItEF("dlaub@moo.com");  // do it with Microsoft Entity Framework  (parameterized query/operation works identically in DA, I'm just being lazy)
         }
         static void DoItDA()
         {
@@ -57,7 +57,7 @@ namespace QuickStartUI
             Console.ReadKey();
         }
 
-        static void DoItEF()
+        static void DoItEF(string emailAddr)
         {
             using (var dbContext = new QuickStartEntitiesEF.QuickStartDBEntitiesEF())
             {
@@ -69,6 +69,7 @@ namespace QuickStartUI
                 QuickStartEntitiesEF.Customer newCustomer2 = new QuickStartEntitiesEF.Customer();
                 newCustomer2.Name = "New Customer 2";
                 newCustomer2.DateCreated = DateTime.Now;
+                newCustomer2.EmailAddress = emailAddr;
                 dbContext.Customers.Add(newCustomer2);  // vs. dbContext.Add(newCustomer)
                 // Commit new customers to the database.
                 dbContext.SaveChanges();
@@ -83,6 +84,11 @@ namespace QuickStartUI
                                                                 select c).FirstOrDefault();
                 // Delete the 'New Customer' from the database.
                 dbContext.Customers.Remove(customerToDelete); // vs. dbContext.Delete(customerToDelete);
+                // delete using parameterized LINQ query (compile time bound)
+                QuickStartEntitiesEF.Customer customerToDelete2 = (from c in dbContext.Customers
+                                                                  where c.EmailAddress == emailAddr
+                                                                  select c).FirstOrDefault();
+                dbContext.Customers.Remove(customerToDelete2); // vs. dbContext.Delete(customerToDelete);
                 // Commit changes to the database.
                 dbContext.SaveChanges();
             }
